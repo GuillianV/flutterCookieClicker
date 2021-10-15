@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './widgets/clicker.dart';
 import './views/shop.dart';
 import 'dart:math' as math;
 
@@ -31,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
+
   int _counter = 0;
   late final AnimationController _rotateClickAnimationController;
 
@@ -68,44 +70,14 @@ class _MyHomePageState extends State<MyHomePage>
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text(
-                    'You have pushed the button this many times:',
+                  Clicker(
+                    rotateClickAnimationController: _rotateClickAnimationController,
+                    onTap:(){ _incrementCounter();},
+                    ),
+                  Text(
+                    '$_counter',
+                    style: Theme.of(context).textTheme.headline4,
                   ),
-                  AnimatedBuilder(
-                      animation: _rotateClickAnimationController,
-                      builder: (_, child) {
-                        return Transform.rotate(
-                          child: child,
-                          angle: 2 * _rotateClickAnimationController.value * math.pi,
-                        );
-                      },
-                      child: GestureDetector(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(500),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.8),
-                                spreadRadius: 10,
-                                blurRadius: 70,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                            image: const DecorationImage(
-                              image:
-                                  AssetImage('assets/images/neon-clicker.png'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          height: MediaQuery.of(context).size.width * 0.5,
-                          width: MediaQuery.of(context).size.width * 0.5,
-                        ),
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          _incrementCounter();
-                        },
-                      )),
                   Text(
                     '$_counter',
                     style: Theme.of(context).textTheme.headline4,
@@ -125,3 +97,4 @@ class _MyHomePageState extends State<MyHomePage>
     );
   }
 }
+
