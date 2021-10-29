@@ -118,7 +118,7 @@ class _ClickerState extends State<Clicker> {
   @override
   void initState() {
     super.initState();
- 
+      
      Timer timer = Timer.periodic(const Duration(seconds: 1), (Timer t) => UpdateClickPerSecond());
 
      Timer increaseRot = Timer.periodic(const Duration(milliseconds: 1), (Timer t) => UpdateRotation());
@@ -135,7 +135,7 @@ class _ClickerState extends State<Clicker> {
 
 
   void UpdateRotation(){
-    baseRotate += 0.01 + (clickPerSecond/2*0.01);
+    baseRotate += 0.01 + (clickPerSecond*0.01);
   }
 
   @override

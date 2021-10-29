@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
 
   int _counter = 0;
+  
   late final AnimationController _rotateClickAnimationController;
 
   @override
@@ -61,9 +62,8 @@ class _MyHomePageState extends State<MyHomePage>
           ),
         ),
         child: Center(
-          child: Column(
-            children: [
-              Column(
+          
+            child:   Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Clicker(
@@ -76,8 +76,7 @@ class _MyHomePageState extends State<MyHomePage>
                   ),
                 ],
               ),
-            ],
-          ),
+          
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
