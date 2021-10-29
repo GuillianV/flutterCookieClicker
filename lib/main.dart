@@ -1,3 +1,4 @@
+import 'package:coockie_clicker/widgets/buy_button.dart';
 import 'package:flutter/material.dart';
 import './widgets/clicker.dart';
 import './views/shop.dart';
@@ -31,9 +32,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-
   int _counter = 0;
-  
+
+  double widthScreen = 0;
+  double heightScreen = 0;
   late final AnimationController _rotateClickAnimationController;
 
   @override
@@ -53,6 +55,10 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
+
+    widthScreen = MediaQuery.of(context).size.width;
+    heightScreen = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -62,24 +68,30 @@ class _MyHomePageState extends State<MyHomePage>
           ),
         ),
         child: Center(
-          
-            child:   Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Clicker(
-                    rotateClickAnimationController: _rotateClickAnimationController,
-                    onTap:(){ _incrementCounter();},
-                    ),
-                  Text(
-                    '$_counter',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Clicker(
+                rotateClickAnimationController: _rotateClickAnimationController,
+                onTap: () {
+                  _incrementCounter();
+                },
               ),
-          
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:  [
+                  BuyButton(onTap: () {_incrementCounter();}, innerText: "Click x2", imageUrl: 'assets/images/icon-stonks.png' , sizeMultiplier: 1.4, price: 20, recompense: "Clicker auto"),
+                   BuyButton(onTap: () {_incrementCounter();}, innerText: "Auto Clicker", imageUrl: 'assets/images/icon-mouse.png' , sizeMultiplier: 1.4,price: 40, recompense: "Clicker double"),
+                ],
+              )
+            ],
+          ),
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
-
