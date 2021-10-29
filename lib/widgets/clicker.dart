@@ -121,7 +121,7 @@ class _ClickerState extends State<Clicker> {
  
      Timer timer = Timer.periodic(const Duration(seconds: 1), (Timer t) => UpdateClickPerSecond());
 
-     Timer increaseRot = Timer.periodic(const Duration(microseconds: 10), (Timer t) => UpdateRotation());
+     Timer increaseRot = Timer.periodic(const Duration(milliseconds: 1), (Timer t) => UpdateRotation());
   }
 
 
@@ -146,7 +146,7 @@ class _ClickerState extends State<Clicker> {
           return Transform.rotate(
             child: child,
             
-            angle:    math.pi + baseRotate,
+            angle:   widget._rotateClickAnimationController.velocity * (math.pi * baseRotate),
           );
         },
         child: GestureDetector(

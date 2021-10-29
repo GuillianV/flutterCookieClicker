@@ -13,10 +13,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Neon clicker',
-      theme: ThemeData(),
-      home: const MyHomePage(title: 'Neon clicker'),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(title: 'Neon clicker'),
     );
   }
 }
@@ -41,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage>
     super.initState();
     _rotateClickAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(minutes: 1),
+      duration: const Duration(seconds: 60),
     )..repeat();
   }
 
@@ -54,9 +53,6 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -78,21 +74,11 @@ class _MyHomePageState extends State<MyHomePage>
                     '$_counter',
                     style: Theme.of(context).textTheme.headline4,
                   ),
-                  Text(
-                    '$_counter',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
                 ],
               ),
             ],
           ),
         ),
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
