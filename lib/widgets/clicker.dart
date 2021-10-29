@@ -102,8 +102,7 @@ class Clicker extends StatefulWidget {
   final double _blurRadius;
   final double _borderRadius; 
 
-   int clickPerSecond = 0;
-   
+ 
 
 
   @override
@@ -112,7 +111,9 @@ class Clicker extends StatefulWidget {
 
 class _ClickerState extends State<Clicker> {
 
-int clickPerSecCompt = 0;
+  int clickPerSecond = 0;
+  double baseRotate = 0;
+  int clickPerSecCompt = 0;
 
   @override
   void initState() {
@@ -120,15 +121,22 @@ int clickPerSecCompt = 0;
  
      Timer timer = Timer.periodic(const Duration(seconds: 1), (Timer t) => UpdateClickPerSecond());
 
+     Timer increaseRot = Timer.periodic(const Duration(microseconds: 10), (Timer t) => UpdateRotation());
   }
 
 
   void UpdateClickPerSecond(){
-    widget.clickPerSecond = clickPerSecCompt;
+
+
+    clickPerSecond = clickPerSecCompt;
     clickPerSecCompt = 0;
 
   }
 
+
+  void UpdateRotation(){
+    baseRotate += 0.01 + (clickPerSecond/2*0.01);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +145,8 @@ int clickPerSecCompt = 0;
         builder: (_, child) {
           return Transform.rotate(
             child: child,
-            angle:   ( widget.clickPerSecond+1) * widget._rotateClickAnimationController.value * math.pi,
+            
+            angle:    math.pi + baseRotate,
           );
         },
         child: GestureDetector(
@@ -166,7 +175,6 @@ int clickPerSecCompt = 0;
           onTap: () {
             widget._onTap();
             clickPerSecCompt++;
-           
           }, 
         ));
   }
